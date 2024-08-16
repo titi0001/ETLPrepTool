@@ -1,0 +1,7 @@
+pandas
+openpyxl
+pyarrow
+streamlit 
+matplotlib
+autopep8
+jupyter
