@@ -1,0 +1,48 @@
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    environment:
+      POSTGRES_DB: crm
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql   
+      - ./processed_data:/docker-entrypoint-initdb.d/processed_data  
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: my-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-custom-jupyter:latest
+    container_name: my-jupyter
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: ""
+      JUPYTER_PASSWORD: ""  
+    volumes:
+      - jupyter_data:/home/jovyan/work
+      - jupyter_data:/home/jovyan/data
+    ports:
+      - "8888:8888"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  jupyter_data:
