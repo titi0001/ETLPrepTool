@@ -7,9 +7,6 @@ ___
 
 #### Passo 1: Instalar o Python e Docker (se necessário)
 
-```bash
-pip install python
-```
 
 Se o Python não estiver instalado, você pode baixá-lo e instalá-lo a partir do site oficial do [Python](https://www.python.org/downloads/).
 Se o Docker não estiver instalado, você pode baixá-lo e instalá-lo a partir do site oficial do [Docker](https://www.docker.com/products/docker-desktop/).
