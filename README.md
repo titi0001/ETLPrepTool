@@ -13,40 +13,17 @@ Se o Docker não estiver instalado, você pode baixá-lo e instalá-lo a partir 
 ___
 
 
-#### Passo 2: Criar um Ambiente Virtual:
+#### Passo 2:  script inital do projeto
 
-```bash
-python -m venv venv
+Ambiente Windows
+```shell
+.\initial.ps1
+```
+Ambiente linux/Mac
+```shell
+.\initial.sh
 ```
 
-  - 2.1 Ative o ambiente virtual:
-
-    Windows:
-
-    ```bash
-    .venv\Scripts\activate
-    ```
-
-  - Unix:
-
-    ```bash
-    source .venv\Scripts\activate
-    ```
-  ___
-
-
-#### Passo 3: Instalar as Bibliotecas Necessárias
-
-```bash
-pip install -r .\requirements.txt
-```
-___
-
-#### Passo 4: Executar o comando para abir uma tela de front end
-
-```bash
-streamlit run app.py
-```
 
 >Porque usar o Streamlit:
 >>Facilidade de Uso
