@@ -24,13 +24,13 @@ python -m venv venv
     Windows:
 
     ```bash
-    venv\Scripts\activate
+    .venv\Scripts\activate
     ```
 
   - Unix:
 
     ```bash
-    source venv\Scripts\activate
+    source .venv\Scripts\activate
     ```
   ___
 
