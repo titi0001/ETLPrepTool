@@ -7,24 +7,32 @@
    <summary><strong> 1. Crie consultas demonstrar o valor total em faturamento, o ticket médio por pedido e o tempo médio entre a realização de um pedido e a saída para entrega; </strong></summary>
 
 ```sql
+WITH 
+TotalFaturamento AS (
+    SELECT SUM(fv.OrderQuantity * dp.UnitPrice) AS ValorTotal
+    FROM fVendas fv
+    JOIN dProduto dp ON fv.ProductKey = dp.ProductKey
+    WHERE fv.OrderDate IS NOT NULL
+),
+
+TicketMedioPorPedido AS (
+    SELECT AVG(fv.OrderQuantity * dp.UnitPrice) AS TicketMedio
+    FROM fVendas fv
+    JOIN dProduto dp ON fv.ProductKey = dp.ProductKey
+    WHERE fv.OrderDate IS NOT NULL
+    GROUP BY fv.SalesOrderNumber
+),
+
+TempoMedioEntrega AS (
+    SELECT FLOOR(AVG(EXTRACT(EPOCH FROM (fv.ShipDate - fv.OrderDate)) / 86400)) AS TempoMedioDias
+    FROM fVendas fv
+    WHERE fv.OrderDate IS NOT NULL
+)
+
 SELECT 
-    (SELECT 'R$ ' || TO_CHAR(SUM(fv.OrderQuantity * dp.UnitPrice), 'FM999,999,999,990.00')
-     FROM fVendas fv
-     JOIN dProduto dp ON fv.ProductKey = dp.ProductKey
-     WHERE fv.OrderDate IS NOT NULL) AS "Valor Total em Faturamento",
-
-    (SELECT 'R$ ' || TO_CHAR(AVG(subquery.TicketMedio), 'FM999,999,999,990.00')
-     FROM (
-         SELECT AVG(fv.OrderQuantity * dp.UnitPrice) AS TicketMedio
-         FROM fVendas fv
-         JOIN dProduto dp ON fv.ProductKey = dp.ProductKey
-         WHERE fv.OrderDate IS NOT NULL
-         GROUP BY fv.SalesOrderNumber
-     ) subquery) AS "Ticket Médio por Pedido",
-
-    (SELECT TO_CHAR(FLOOR(AVG(EXTRACT(EPOCH FROM (fv.ShipDate - fv.OrderDate)) / 86400)), 'FM999999990')
-     FROM fVendas fv
-     WHERE fv.OrderDate IS NOT NULL) AS "Tempo Médio entre Pedido e Entrega (dias)";
+    'R$ ' || TO_CHAR((SELECT ValorTotal FROM TotalFaturamento), 'FM999,999,999,990.00') AS "Valor Total em Faturamento",
+    'R$ ' || TO_CHAR((SELECT AVG(TicketMedio) FROM TicketMedioPorPedido), 'FM999,999,999,990.00') AS "Ticket Médio por Pedido",
+    TO_CHAR((SELECT TempoMedioDias FROM TempoMedioEntrega), 'FM999999990') AS "Tempo Médio entre Pedido e Entrega (dias)";
 ```
 ##### Resultado 
  ![01](/images/01.png)
@@ -311,7 +319,6 @@ FROM
     FaturamentoTotal ft
 ORDER BY
     (fn.LTV_Faturamento_Total / ft.LTV_Faturamento_Geral) DESC;
-
 ```
 ##### Resultado 
  ![08](/images/08.png)
