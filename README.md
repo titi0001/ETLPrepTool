@@ -1,6 +1,6 @@
-# ETLPrepTool
+## ETLPrepTool
 
- ### Um projeto ETL realiza o tratamento de algumas tabelas, onde um front-end é aberto utilizando o Streamlit para a importação de arquivos CSV e XLSX. Esses arquivos são convertidos para o formato CSV, e, após o tratamento dos dados, é possível subir um ambiente Docker Compose, carregando o banco de dados e populando-o com os arquivos CSV processados.
+ #### Este projeto de ETL, desenvolvido para um teste técnico, utiliza o Streamlit como front-end para facilitar o processo de carregamento, tratamento e inserção de dados em formato CSV em um banco de dados PostgreSQL. O usuário pode enviar arquivos CSV diretamente pela interface, e o sistema automaticamente trata os dados e os insere no banco de dados. Além disso, o front-end permite a realização de consultas SQL dinâmicas, possibilitando ao usuário obter resultados em tempo real diretamente na interface.
 
 ### [consultas SQL do TESTE](QUERY.md)
 ___

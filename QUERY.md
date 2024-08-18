@@ -1,5 +1,7 @@
  # A Entrega do resultado deve ser um arquivo contendo as consultas SQL.
  ##### Postgres: Banco de dados utilizado para construção das queries.
+ ##### foi criado um ambiente de desenvolvimento dinamico na raiz do projeto link abaixo
+ #####  [Ambiente de teste](README.md)
 
 
  
