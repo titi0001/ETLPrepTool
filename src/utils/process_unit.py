@@ -42,7 +42,7 @@ def unit_price(caminho_csv):
         if 'ProductDetail' in df.columns:
             df = preencher_vazios_com_null(df)
 
-        caminho_saida = './staging_data'
+        caminho_saida = './src/staging_data'
         os.makedirs(caminho_saida, exist_ok=True)
 
         nome_arquivo = os.path.basename(caminho_csv)

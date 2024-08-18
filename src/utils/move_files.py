@@ -10,9 +10,9 @@ def converter_colunas_para_minusculas(df):
 
 
 def mover_arquivos():
-    input_dir = "./input_data"
-    staging_dir = "./staging_data"
-    processed_dir = "./data"
+    input_dir = "./src/input_data"
+    staging_dir = "./src/staging_data"
+    processed_dir = "./src/data"
 
     os.makedirs(processed_dir, exist_ok=True)
 

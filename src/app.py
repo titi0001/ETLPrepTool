@@ -11,8 +11,8 @@ def main():
     st.title("Conversor de Arquivos e Consulta SQL- Ambiente de Desenvolvimento")
 
     # Verifica se os diretórios necessários existem e os cria se não existirem
-    if not os.path.exists("./input_data"):
-        os.makedirs("./input_data")
+    if not os.path.exists("./src/input_data"):
+        os.makedirs("./src/input_data")
 
     # Criando uma barra lateral para navegação
     menu = ["Conversão de Arquivos", "Consulta SQL"]
@@ -34,7 +34,7 @@ def main():
         if arquivo_carregado is not None:
             try:
                 nome_arquivo, _ = os.path.splitext(arquivo_carregado.name)
-                caminho_csv = f"./input_data/{nome_arquivo}.csv"
+                caminho_csv = f"./src/input_data/{nome_arquivo}.csv"
 
                 if os.path.exists(caminho_csv):
                     st.warning(
@@ -80,7 +80,6 @@ def main():
         # Campo de input para a consulta SQL completa
         consulta_sql = st.text_area("Insira sua consulta SQL:", height=200)
 
-        # Quando o botão é clicado, executar a consulta SQL
         # Quando o botão é clicado, executar a consulta SQL
         if st.button("Executar Consulta"):
             if consulta_sql.strip():
