@@ -3,9 +3,6 @@ openpyxl
 pyarrow
 streamlit
 autopep8
-black
 sqlalchemy
-black
 faker
-flake8
 psycopg2
