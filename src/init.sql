@@ -68,9 +68,10 @@ $do$
 BEGIN
    IF NOT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'fMetas') THEN
       CREATE TABLE fMetas (
-          Pais VARCHAR(255),                       
-          Ano INT,                     
-          Meta DECIMAL(12, 3)             
+         Pais VARCHAR(255),                       
+         Ano INT,                     
+         Meta DECIMAL(12, 3),
+         PRIMARY KEY (Pais, Ano)             
       );
    END IF;
 END
