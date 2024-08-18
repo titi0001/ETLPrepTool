@@ -81,25 +81,3 @@ ADD CONSTRAINT fk_fvendas_customerkey
 FOREIGN KEY (CustomerKey) REFERENCES dCliente (CustomerKey),
 ADD CONSTRAINT fk_fvendas_productkey
 FOREIGN KEY (ProductKey) REFERENCES dProduto (ProductKey);
-            
-
-COPY dCliente(CustomerKey, BusinessType, StateCode, StateName, CityName, Continent, CountryName, Customer)
-FROM '/docker-entrypoint-initdb.d/processed_data/dCliente.csv'
-DELIMITER ','
-CSV HEADER;
-
-COPY dProduto(CategoryName, ProductDetail, ProductKey, ProductName, ProductSize, SubcategoryName, UnitPrice)
-FROM '/docker-entrypoint-initdb.d/processed_data/dProduto.csv'
-DELIMITER ','
-CSV HEADER;
-
-COPY fVendas(CustomerKey, DueDate, OrderDate, ShipDate, ProductKey, SalesOrderNumber, OrderQuantity)
-FROM '/docker-entrypoint-initdb.d/processed_data/fVendas.csv'
-DELIMITER ','
-CSV HEADER;
-
-
-COPY fMetas(Pais, Ano, Meta)
-FROM '/docker-entrypoint-initdb.d/processed_data/fMetas.csv'
-DELIMITER ','
-CSV HEADER;
