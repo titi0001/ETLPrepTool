@@ -3,13 +3,11 @@ import shutil
 import pandas as pd
 from sqlalchemy import create_engine, text
 
-
 def converter_colunas_para_minusculas(df):
     df.columns = df.columns.str.lower()
     return df
 
-
-def mover_arquivos():
+def mover_arquivos(sobrescrever=False):
     base_dir = os.path.abspath(os.path.dirname(__file__))
     src_dir = os.path.join(base_dir, "../")
     input_dir = os.path.join(src_dir, "input_data")
@@ -74,10 +72,29 @@ def mover_arquivos():
                             f"Colunas do DataFrame não correspondem às colunas da tabela {table_name}"
                         )
 
-                    # Insere os dados na tabela existente no banco de dados
-                    print(f"Inserindo dados na tabela {table_name}")
-                    df.to_sql(table_name, engine, if_exists="append", index=False)
-                    print(f"Dados inseridos com sucesso na tabela {table_name}")
+                    # Verifica se deve sobrescrever ou ignorar duplicados
+                    if sobrescrever:
+                        for _, row in df.iterrows():
+                            upsert_query = text(
+                                f"""
+                                INSERT INTO {table_name} ({', '.join(df.columns)})
+                                VALUES ({', '.join([f':{col}' for col in df.columns])})
+                                ON CONFLICT (productkey) 
+                                DO UPDATE SET {', '.join([f'{col} = EXCLUDED.{col}' for col in df.columns if col != 'productkey'])}
+                                """
+                            )
+                            connection.execute(upsert_query, row.to_dict())
+                            print(f"Registro com productkey {row['productkey']} inserido/atualizado na tabela '{table_name}'.")
+                    else:
+                        df.to_sql(table_name, engine, if_exists="append", index=False)
+                        print(f"Dados inseridos com sucesso na tabela {table_name}")
 
                 except ValueError as e:
                     print(f"Erro ao processar o arquivo {filename}: {e}")
+                except Exception as e:
+                    print(f"Erro inesperado: {e}")
+
+                # Deletar o arquivo após processamento
+                os.remove(csv_path)
+                print(f"Arquivo '{filename}' removido após processamento.")
+
