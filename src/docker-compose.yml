@@ -25,24 +25,6 @@ services:
     depends_on:
       - postgres
 
-  jupyter:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: my-custom-jupyter:latest
-    container_name: my-jupyter
-    environment:
-      JUPYTER_ENABLE_LAB: "yes"
-      JUPYTER_TOKEN: ""
-      JUPYTER_PASSWORD: ""  
-    volumes:
-      - jupyter_data:/home/jovyan/work
-      - jupyter_data:/home/jovyan/data
-    ports:
-      - "8888:8888"
-    depends_on:
-      - postgres
-
 volumes:
   postgres_data:
   jupyter_data:
