@@ -10,9 +10,11 @@ def converter_colunas_para_minusculas(df):
 
 
 def mover_arquivos():
-    input_dir = "./src/input_data"
-    staging_dir = "./src/staging_data"
-    processed_dir = "./src/data"
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    src_dir = os.path.join(base_dir, "../")
+    input_dir = os.path.join(src_dir, "input_data")
+    staging_dir = os.path.join(src_dir, "staging_data")
+    processed_dir = os.path.join(src_dir, "data")
 
     os.makedirs(processed_dir, exist_ok=True)
 
@@ -42,6 +44,7 @@ def mover_arquivos():
         f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
     )
 
+    # Conexão ao banco de dados e processamento dos arquivos CSV
     with engine.connect() as connection:
         for filename in os.listdir(processed_dir):
             if filename.endswith(".csv"):
@@ -68,10 +71,10 @@ def mover_arquivos():
 
                     if not df_columns.issubset(expected_columns):
                         raise ValueError(
-                            f"""Colunas do DataFrame não correspondem
-                                às colunas da tabela {table_name}"""
+                            f"Colunas do DataFrame não correspondem às colunas da tabela {table_name}"
                         )
 
+                    # Insere os dados na tabela existente no banco de dados
                     print(f"Inserindo dados na tabela {table_name}")
                     df.to_sql(table_name, engine, if_exists="append", index=False)
                     print(f"Dados inseridos com sucesso na tabela {table_name}")

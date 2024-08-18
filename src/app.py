@@ -8,11 +8,15 @@ from utils.query_utils import executar_query  # Importando a função criada
 
 
 def main():
-    st.title("Conversor de Arquivos e Consulta SQL- Ambiente de Desenvolvimento")
+    st.title("Conversor de Arquivos e Consulta SQL - Ambiente de Desenvolvimento")
 
     # Verifica se os diretórios necessários existem e os cria se não existirem
-    if not os.path.exists("./src/input_data"):
-        os.makedirs("./src/input_data")
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    src_dir = os.path.join(base_dir, ".")
+    input_data_dir = os.path.join(src_dir, "input_data")
+
+    if not os.path.exists(input_data_dir):
+        os.makedirs(input_data_dir)
 
     # Criando uma barra lateral para navegação
     menu = ["Conversão de Arquivos", "Consulta SQL"]
@@ -34,7 +38,7 @@ def main():
         if arquivo_carregado is not None:
             try:
                 nome_arquivo, _ = os.path.splitext(arquivo_carregado.name)
-                caminho_csv = f"./src/input_data/{nome_arquivo}.csv"
+                caminho_csv = os.path.join(input_data_dir, f"{nome_arquivo}.csv")
 
                 if os.path.exists(caminho_csv):
                     st.warning(
@@ -69,7 +73,6 @@ def main():
             except Exception as e:
                 st.error(f"Erro ao processar o arquivo: {e}")
 
-        # Adicionando um botão para mover os arquivos e executar o DB
         st.write("Aplicar ELT e executar o DB após carregar todos os arquivos")
         if st.button("ELT e executar o DB"):
             mover_arquivos()
