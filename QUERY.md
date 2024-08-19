@@ -1,8 +1,17 @@
  # A Entrega do resultado deve ser um arquivo contendo as consultas SQL.
+
  ##### Postgres: Banco de dados utilizado para construção das queries.
+
+ ---
+ ##### Arquivos usado para aplicar o teste
+ ##### [Cliente](./test/dCliente.csv)
+ ##### [Produto](./test/dCliente.csv)
+ ##### [Metas](./test/dCliente.csv)
+ ##### [Vendas](./test/dCliente.csv)
+ ---
  ##### foi criado um ambiente de desenvolvimento dinamico na raiz do projeto link abaixo
  #####  [Ambiente de teste](README.md)
-
+---
 
  
  <details>
