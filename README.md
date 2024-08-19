@@ -5,10 +5,10 @@
 ### [consultas SQL do TESTE](QUERY.md)
 ---
  ##### Arquivos usado para aplicar o teste
- ##### [Cliente](./test/dCliente.csv)
- ##### [Produto](./test/dCliente.csv)
- ##### [Metas](./test/dCliente.csv)
- ##### [Vendas](./test/dCliente.csv)
+ ##### [Cliente](./csv/dCliente.csv)
+ ##### [Produto](./csv/dCliente.csv)
+ ##### [Metas](./csv/dCliente.csv)
+ ##### [Vendas](./csv/dCliente.csv)
 ___
 
 #### Passo 1: Instalar o Python e Docker (se necessário)

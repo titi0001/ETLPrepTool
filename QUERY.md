@@ -4,10 +4,10 @@
 
  ---
  ##### Arquivos usado para aplicar o teste
- ##### [Cliente](./test/dCliente.csv)
- ##### [Produto](./test/dCliente.csv)
- ##### [Metas](./test/dCliente.csv)
- ##### [Vendas](./test/dCliente.csv)
+ ##### [Cliente](./csv/dCliente.csv)
+ ##### [Produto](./csv/dCliente.csv)
+ ##### [Metas](./csv/dCliente.csv)
+ ##### [Vendas](./csv/dCliente.csv)
  ---
  ##### foi criado um ambiente de desenvolvimento dinamico na raiz do projeto link abaixo
  #####  [Ambiente de teste](README.md)
